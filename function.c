@@ -1,5 +1,5 @@
-mpz_t mpz_gcd(mpz_t g, mpz_t a, mpz_t b){
-    return 0;
+void mpz_inits (mpz_t g, mpz_t a, mpz_t b,NULL){
+    
 }
 
 int inverso_modular(mpz_t r, const mpz_t a, const mpz_t n){
