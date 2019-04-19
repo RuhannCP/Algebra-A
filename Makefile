@@ -1,10 +1,10 @@
 all: main
 
-main: listaencadeada.o
-	g++ -w main.cpp listaencadeada.o -o main -std=c++11 -Wunused-variable
+main: function.o
+	g++ -w main.c function.o -o main -Wunused-variable
 
-listaencadeada.o: listaencadeada.cpp
-	g++ -c listaencadeada.cpp -o listaencadeada.o -Wunused-variable
+function.o: function.c
+	g++ function.c -c -g -o function.o -Wunused-variable -lgmp
 
 clean:
 	-rm -rf *.o
