@@ -3,33 +3,32 @@
 #include <assert.h>
 #include "function.h"
 
-int fact(int n){
+void fact(int n){
+	int i = 0;
+	mpz_t p ;
 
-	int i;
-	int p = 1;
+	mpz_init_set_ui(p,1); 
 
-	for (i=1; i <= n ; ++i){
-		p = p * i;
-	}
-	return p;
+	for (i=1; i <= n ; ++i)
+		mpz_mul_ui(p,p,i);
+	
+	printf ("%d!  =  \n", n);
+	mpz_out_str(stdout,10,p);
+	mpz_clear(p);
 
 }
 
 int main(int argc, char * argv[]){
-	int n;
+	int n = 0;
 
 	if (argc <= 1){
-		/* Check if user has a command line argument */
-		printf ("Usage: %s <number>\n", argv[0]);
+		printf ("Usage: %s <number> \n", argv[0]);
 		return 2;
 	}
 
-	n = atoi(argv[1]); /* Extract the command line argument */
-
+	n = atoi(argv[1]);
 	assert( n >= 0);
-
-	/* Print the factorial */
-	printf ("%d ! = %d \n", n, fact(n));
+	fact(n);
 
 	return 1;
 }
