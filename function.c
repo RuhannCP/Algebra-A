@@ -13,7 +13,13 @@ void mpz_mdc(mpz_t g, mpz_t x, mpz_t y, const mpz_t a, const mpz_t b){
 		mpz_set (y,g);
 	}
 
-	gmp_printf("MDC = %zd", g);
+	gmp_printf("MDC = %zd", x);
+
+	mpz_clear(a);
+	mpz_clear(b);
+	mpz_clear(x);
+	mpz_clear(y);
+	mpz_clear(g);
 }
 
 int inverso_modular(mpz_t r, const mpz_t a, const mpz_t n){
