@@ -5,15 +5,11 @@
 
 int main(int argc, char * argv[]){
 	int n = 0;
+	mpz_t a,b,x,y,g;
+	gmp_scanf("%Z %Z %Z %Z",&a,&b,&x,&y);
+	//mpz_inits ( g,x,y,a,b);
 
-	if (argc <= 1){
-		printf ("Usage: %s <number> \n", argv[0]);
-		return 2;
-	}
-
-	n = atoi(argv[1]);
-	assert( n >= 0);
-	fact(n);
-
+	//mpz_mdc(g,x,y,a,b);
+	
 	return 1;
 }

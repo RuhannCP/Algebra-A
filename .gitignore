@@ -1,6 +1,4 @@
 ./vscode
-
 *.bat
-
 *.sh
 *.pdf

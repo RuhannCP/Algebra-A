@@ -1,13 +1,15 @@
 all: main
 
-main: function.o
-	g++ -w main.c function.o -o main -Wunused-variable -lgmp
+main: function
+	gcc -w main.c function.o -g -o main -Wunused-variable -lgmp
 
-function.o: function.c
-	g++ function.c -c -g -o function.o -Wunused-variable -lgmp
+function: function.c
+	gcc function.c -c -g -o function.o -Wunused-variable -lgmp
 
 clean:
 	-rm -rf *.o
 mrproper: clean
 	-rm -rf main
 
+valgrind:
+	valgrind ./main --leak-check=full
