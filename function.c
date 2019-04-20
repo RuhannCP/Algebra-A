@@ -3,25 +3,25 @@
 #include <gmp.h>
 
 void mpz_mdc(mpz_t g, mpz_t x, mpz_t y, const mpz_t a, const mpz_t b){
-	
-	 mpz_set (x, a);
-	 mpz_set (y, b);
 
-	while ( g != 0){
-		mpz_mod(g,x,y);
-		mpz_set (x, y);
-		mpz_set (y,g);
-	}
+	mpz_set (x, a);
+	mpz_set (y, b);
 
-	gmp_printf("MDC = %zd", x);
+	do{
+		mpz_mod(g,a,b);
+		mpz_set (a,b);
+		mpz_set (b,g);
+		gmp_printf("while %Zd \n \n",g);
+	}while((mpz_cmp_d (g , 0)));
 
-	mpz_clear(a);
-	mpz_clear(b);
+    mpz_set(g,a);
+	gmp_printf("MDC = %Zd \n",g);
+
 	mpz_clear(x);
 	mpz_clear(y);
 	mpz_clear(g);
 }
-
+/*
 int inverso_modular(mpz_t r, const mpz_t a, const mpz_t n){
     return 0;
 }
@@ -44,3 +44,21 @@ void fact(int n){
 	mpz_clear(p);
 
 }
+/*void mdc_estendido(mpz_t g, mpz_t x, mpz_t y, const mpz_t a, const mpz_t b){
+
+    // Base Case 
+    if (a == 0) { 
+        *x = 0; 
+        *y = 1 q; 
+        return b; 
+    } 
+  
+    int x1, y1; // To store results of recursive call 
+    int gcd = mdc_estendido(b % a, a, &x1, &y1); 
+  
+    // Update x and y using results of recursive 
+    // call 
+    *x = y1 - (b / a) * x1; 
+    *y = x1; 
+  
+}*/

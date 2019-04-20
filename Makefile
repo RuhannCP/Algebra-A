@@ -12,4 +12,4 @@ mrproper: clean
 	-rm -rf main
 
 valgrind:
-	valgrind ./main --leak-check=full
+	valgrind ./main < input.txt --leak-check=full
