@@ -22,10 +22,8 @@ int main(int argc, char * argv[]){
 	gmp_printf("A: %Zd \n\n",a);
 	gmp_printf("B: %Zd \n\n",b);
 	
-	mpz_mdc(g,x,y,a,b);
-	mpz_clear(a);
-	mpz_clear(b);
-
-	
+	mpz_mdc(g,x,y,a,b);	
+	mpz_clear (a);
+	mpz_clear (b);
 	return 0;
 }
