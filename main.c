@@ -15,6 +15,8 @@ int main(int argc, char * argv[]){
 	mpz_init (y);
 	mpz_t g;
 	mpz_init (g);
+	mpz_t r;
+	mpz_init(r);
 	
 	gmp_scanf("%Zd",&a);
 	gmp_scanf("%Zd",&b);
@@ -22,8 +24,12 @@ int main(int argc, char * argv[]){
 	gmp_printf("A: %Zd \n\n",a);
 	gmp_printf("B: %Zd \n\n",b);
 	
-	mpz_mdc(g,x,y,a,b);	
-	mpz_clear (a);
-	mpz_clear (b);
+	mdc_estendido(g,x,y,a,b);	
+	gmp_printf("MDC: %Zd \n\n",g);
+
+	inverso_modular(r,a,b);
+	gmp_printf("\ninverso = %Zd\n",r);
+	mpz_clears (a,b,r,NULL);
+	
 	return 0;
 }
