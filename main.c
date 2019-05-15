@@ -4,6 +4,7 @@
 #include <assert.h>
 #include "function.h"
 
+
 int main(int argc, char * argv[]){
 	mpz_t a,b,x,y,g,r;
 	mpz_inits (a,b,x,y,g,r,NULL);
