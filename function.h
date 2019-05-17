@@ -13,3 +13,5 @@ void binary_exp(mpz_t r, const mpz_t b, const mpz_t e, const mpz_t n);
 int talvez_primo(const mpz_t a, const mpz_t n, const mpz_t n1, unsigned int t, const mpz_t q);
 
 void numero_aleatorio(mpz_t r, const mpz_t n, gmp_randstate_t rnd);
+
+void primo_aleatorio(mpz_t r, unsigned int b, gmp_randstate_t rnd);

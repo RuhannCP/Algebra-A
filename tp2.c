@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <gmp.h>
 #include <math.h>
+#include "function.h"
 
 void numero_aleatorio(mpz_t r, const mpz_t n, gmp_randstate_t rnd) {//Função dada
     mp_bitcnt_t num_bits = mpz_sizeinbase(n, 2);
@@ -17,7 +18,7 @@ int talvez_primo(const mpz_t a, const mpz_t n, const mpz_t n1, unsigned int t, c
     mpz_inits (aux, aux1, NULL);
     mpz_div_ui (aux,n,2);
     mpz_div_ui (aux1,n,5);
-
+    
     if (mpz_cmp_ui(aux,0) || mpz_cmp_ui(aux1,0)){//Para caso n seja par ou multiplo de cinco
         return 0;
     }
@@ -56,7 +57,7 @@ int provavelmente_primo(const mpz_t n, unsigned int iter, gmp_randstate_t rnd){
     int i = 0,x=0;
     mpz_t r,n1,t,q;
     mpz_inits (r,n1,t,q,NULL);
-
+    mpz_sub_ui (n1,n,1);
     for(i=1;i<=iter;i++){//Loop verifica primo
         numero_aleatorio(r, n,NULL);//Gerador de possiveis "a"
         
@@ -67,4 +68,19 @@ int provavelmente_primo(const mpz_t n, unsigned int iter, gmp_randstate_t rnd){
     }
     mpz_clears(r,n1,t,q,NULL);
     return 1;
+}
+
+void primo_aleatorio(mpz_t r, unsigned int b, gmp_randstate_t rnd){
+    int n = pow(2,b);
+    int x = 0;
+    do{
+        numero_aleatorio (r,n,rnd);
+
+        x = provavelmente_primo(r,n,rnd);
+        
+        if (x == 1){
+            return 1;
+        }
+    }while(x == 0);
+    return 0;
 }
