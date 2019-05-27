@@ -48,6 +48,43 @@ void codifica(mpz_t r, const char *str){
 }
 
 char *decodifica(const mpz_t n){
-    
+    char *str = (char*) malloc(501*sizeof(char));
+	unsigned int k, letra;
 
+	mpz_t c, n1, aux;
+	mpz_inits(c, n1, aux, NULL);
+	
+	mpz_set(n1, n);
+
+ 	for(k=0; k<500; k++){
+		
+		if(mpz_cmp_ui(n1,0)==0)
+			break;
+		
+		mpz_ui_pow_ui(aux, 256, i);
+		mpz_fdiv_q(aux, n1, aux);
+		mpz_mod_ui(c, aux, 256);
+		mpz_ui_pow_ui(aux, 256, i);
+		mpz_mul(aux, c, aux);
+		mpz_sub(n1, n1, aux);
+		
+		//Converte
+		letra = mpz_get_ui (c);
+		str[i] = (int) letra;
+	}
+
+	str[i]='\0';
+
+	mpz_clears(c, n1, aux, NULL);
+
+	return str;
+
+}
+
+void criptografa(mpz_t C,const mpz_t M,const mpz_t n,const mpz_t e){
+	binary_exp(C, M, e, n);
+}
+
+void descriptografa(mpz_t M,const mpz_t C,const mpz_t n,const mpz_t d){
+	binary_exp(M, C, d, n);
 }
