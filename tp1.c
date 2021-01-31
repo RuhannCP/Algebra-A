@@ -2,8 +2,8 @@
 #include <stdlib.h>
 #include <gmp.h>
 
-void mdc_estendido(mpz_t g, mpz_t x, mpz_t y, const mpz_t a, const mpz_t b){
-	
+void mdc_estendido(mpz_t g, mpz_t x, mpz_t y, const mpz_t a, const mpz_t b)
+{	
 	mpz_t a1,y1,y2,q1,q,x1,x2;//variaveis de auxilio ....
 
 	mpz_inits (a1,q1,y2,q,x1,x2,y1,NULL);
@@ -15,8 +15,8 @@ void mdc_estendido(mpz_t g, mpz_t x, mpz_t y, const mpz_t a, const mpz_t b){
 
 	
 	/*____Operação algoritmo estendido ____*/
-	do{
-
+	do
+	{
 		mpz_div(q,g,a1);
 		
 		mpz_set(q1,g);
@@ -38,7 +38,6 @@ void mdc_estendido(mpz_t g, mpz_t x, mpz_t y, const mpz_t a, const mpz_t b){
 
 	}while((mpz_cmp_d (a1 , 0)));
 
-
 	mpz_clear (x1);
 	mpz_clear (x2);
 	mpz_clear(y1);
@@ -48,13 +47,15 @@ void mdc_estendido(mpz_t g, mpz_t x, mpz_t y, const mpz_t a, const mpz_t b){
 	mpz_clear(a1);
 }
 
-int inverso_modular(mpz_t r, const mpz_t a, const mpz_t n){
+int inverso_modular(mpz_t r, const mpz_t a, const mpz_t n)
+{
 	mpz_t mdc,x,y;
 	mpz_inits(mdc,x,y,NULL);
 	
 	mdc_estendido(mdc,x,y,n,a);
 
-	if( mpz_cmp_ui(mdc,1) == 0 ){
+	if( mpz_cmp_ui(mdc,1) == 0 )
+	{
 		mpz_mod (r,y,n);
 		return 1;
 	}
@@ -66,17 +67,18 @@ int inverso_modular(mpz_t r, const mpz_t a, const mpz_t n){
 	return 0;
 }
 
-void exp_binaria(mpz_t r,const mpz_t b,const mpz_t e,const mpz_t n){
-
+void exp_binaria(mpz_t r,const mpz_t b,const mpz_t e,const mpz_t n)
+{
     mpz_t r1;//variavel auxiliar
 	mpz_init (r1);
 
 	//parada caso expoente 0
-	if (mpz_cmp_ui(e,0) == 0){
+	if (mpz_cmp_ui(e,0) == 0)
+	{
 		mpz_set_ui (r,1);
 		return;
-	}else{
-	
+	}else
+	{	
 		//caso expoente maior que 1
 			mpz_fdiv_q_ui(r1, e, 2);
 			exp_binaria(r, b, r1, n);
@@ -89,7 +91,8 @@ void exp_binaria(mpz_t r,const mpz_t b,const mpz_t e,const mpz_t n){
 
 			mpz_mod_ui(r1, e, 2);
 			
-			if((mpz_cmp_ui(r1,1) == 0) ){
+			if((mpz_cmp_ui(r1,1) == 0) )
+			{
 				mpz_mul(r1, r, b);
 				mpz_mod(r1, r1, n);
 				mpz_set(r, r1);
